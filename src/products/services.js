@@ -19,7 +19,7 @@ const getById = async (id) => {
 
 const createProd = async (product) => {
     const collection = await Database(COLLECTION);
-    let result = collection.insertOne(product);
+    let result = await collection.insertOne(product);
     return result.insertedId;
 };
 
