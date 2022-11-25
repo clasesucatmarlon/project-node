@@ -47,4 +47,21 @@ module.exports.ProductsController = {
             ResponseErrors.error(res);
         }
     },
+    deleteProduct: async (req, res) => {
+        try {
+            const { params : { id }} = req;
+            const product = await ProductsService.getById(id);
+            if (!product) {
+                debug(`Product with id:${id} not found...`);
+                ResponseErrors.error(res, new createError.NotFound());
+            } else {
+                ProductsService.deletedProd(id);
+                ResponseErrors.success(res, 200, `Product with id:${id} deleted...`, product);
+                debug(`Product with id:${id} deleted...`);
+            }
+        } catch (error) {
+            debug(error);
+            ResponseErrors.error(res);
+        }
+    },
 };
