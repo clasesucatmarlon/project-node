@@ -64,4 +64,22 @@ module.exports.ProductsController = {
             ResponseErrors.error(res);
         }
     },
+    updateProduct: async (req, res) => {
+        try {
+            const { params : { id }} = req;
+            const { body } = req;
+            const product = await ProductsService.getById(id);
+            if (!product) {
+                debug(`Product with id:${id} not found...`);
+                ResponseErrors.error(res, new createError.NotFound());
+            } else {
+                ProductsService.updateProd(id, body);
+                ResponseErrors.success(res, 200, `Product with id:${id} was modified success...`, body);
+                debug(`Product with id:${id} was modified...`);
+            }
+        } catch (error) {
+            debug(error);
+            ResponseErrors.error(res);
+        }
+    },
 };
