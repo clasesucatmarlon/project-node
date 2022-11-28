@@ -50,9 +50,28 @@ const deletedProd = async (id) => {
     let result = await collection.deleteOne({ _id: ObjectId(id) });
 };
 
+/**
+ * It takes an id and a product object, and updates the product with the given id with the given
+ * product object.
+ * 
+ * @param id the id of the product to be updated
+ * @param product the body of product
+ */
+const updateProd = async (id, product) => {
+    const collection = await Database(COLLECTION);
+    let result = await collection.updateOne(
+            { _id: ObjectId(id) },
+            {
+                $set: { ...product },
+                $currentDate: { lastModified: true }
+            }
+        );
+};
+
 module.exports.ProductsService = {
     getAll,
     getById,
     createProd,
-    deletedProd
+    deletedProd,
+    updateProd
 };
