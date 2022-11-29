@@ -15,7 +15,7 @@ module.exports.Database = (collection) => new Promise( async (resolve, reject) =
         debug(`Reusing conexion...`);
         // BD a la que se quiere conectar
         const db = connection.db(Config.mongoDbname);
-        // resolver la conección
+        // resolver la conexión
         resolve(db.collection(collection));
     } catch (error) {
         debug(error);

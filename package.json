@@ -4,7 +4,8 @@
   "description": "Project Node - Course NodeJS in Udemy",
   "main": "index.js",
   "scripts": {
-    "dev": "set DEBUG=app:* & nodemon index.js"
+    "dev": "set DEBUG=app:* & nodemon index.js",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "Marlon GARCIA",
